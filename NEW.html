@@ -1,0 +1,293 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Umar | Advanced Portfolio</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#00adb5;
+  --bg:#f5f7fa;
+  --text:#222;
+  --card:#ffffff;
+}
+
+body.dark{
+  --bg:#121212;
+  --text:#f1f1f1;
+  --card:#1e1e1e;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);transition:0.3s;}
+
+header{
+  position:fixed;
+  width:100%;
+  top:0;
+  background:var(--card);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 40px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.1);
+  z-index:1000;
+}
+
+.logo{font-size:22px;font-weight:700;color:var(--primary);}
+nav ul{display:flex;list-style:none;}
+nav ul li{margin-left:20px;}
+nav ul li a{text-decoration:none;color:var(--text);font-weight:500;}
+nav ul li a:hover{color:var(--primary);}
+
+.toggle-btn{
+  cursor:pointer;
+  background:var(--primary);
+  color:white;
+  border:none;
+  padding:6px 12px;
+  border-radius:20px;
+}
+
+section{padding:100px 10%;min-height:100vh;}
+.hero{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+}
+
+.hero h1{font-size:48px;margin-bottom:10px;}
+.hero span{color:var(--primary);}
+.hero p{font-size:20px;margin-bottom:20px;}
+
+.btn{
+  background:var(--primary);
+  padding:10px 20px;
+  color:white;
+  text-decoration:none;
+  border-radius:25px;
+}
+
+.about,.contact{text-align:center;}
+
+.projects .filter-btns{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.filter-btns button{
+  margin:5px;
+  padding:8px 15px;
+  border:none;
+  cursor:pointer;
+  background:var(--card);
+  color:var(--text);
+  border-radius:20px;
+}
+
+.projects-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+
+.project{
+  background:var(--card);
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+  transition:0.3s;
+}
+
+.project:hover{transform:translateY(-10px);}
+
+.contact form{
+  max-width:500px;
+  margin:auto;
+  display:flex;
+  flex-direction:column;
+}
+
+.contact input,.contact textarea{
+  padding:10px;
+  margin:10px 0;
+  border:1px solid #ccc;
+  border-radius:5px;
+}
+
+.contact button{
+  padding:10px;
+  border:none;
+  background:var(--primary);
+  color:white;
+  cursor:pointer;
+  border-radius:20px;
+}
+
+footer{
+  text-align:center;
+  padding:20px;
+  background:var(--card);
+}
+
+#topBtn{
+  position:fixed;
+  bottom:30px;
+  right:30px;
+  padding:10px 15px;
+  background:var(--primary);
+  color:white;
+  border:none;
+  border-radius:50%;
+  display:none;
+  cursor:pointer;
+}
+
+.fade{
+  opacity:0;
+  transform:translateY(20px);
+  transition:0.6s;
+}
+.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+@media(max-width:768px){
+  nav ul{display:none;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Umar</div>
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <button class="toggle-btn" onclick="toggleMode()">🌙</button>
+</header>
+
+<section id="home" class="hero">
+  <h1>Hi, I'm <span>Umar</span></h1>
+  <p><span id="typing"></span></p>
+  <a href="#projects" class="btn">View My Work</a>
+</section>
+
+<section id="about" class="about fade">
+  <h2>About Me</h2>
+  <p>I am a passionate Web Developer creating modern and interactive websites with clean design and powerful functionality.</p>
+</section>
+
+<section id="projects" class="projects fade">
+  <h2 style="text-align:center;">My Projects</h2>
+
+  <div class="filter-btns">
+    <button onclick="filterSelection('all')">All</button>
+    <button onclick="filterSelection('web')">Web</button>
+    <button onclick="filterSelection('app')">App</button>
+  </div>
+
+  <div class="projects-grid">
+    <div class="project web">Web Project 1</div>
+    <div class="project app">App Project 1</div>
+    <div class="project web">Web Project 2</div>
+    <div class="project app">App Project 2</div>
+  </div>
+</section>
+
+<section id="contact" class="contact fade">
+  <h2>Contact Me</h2>
+  <form onsubmit="return sendMail(event)">
+    <input type="text" id="name" placeholder="Your Name" required>
+    <input type="email" id="email" placeholder="Your Email" required>
+    <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+<footer>
+  © 2026 Umar | Advanced Portfolio
+</footer>
+
+<button id="topBtn" onclick="topFunction()">↑</button>
+
+<script>
+// Dark Mode
+function toggleMode(){
+  document.body.classList.toggle("dark");
+}
+
+// Typing Effect
+const text = ["Web Developer","UI Designer","Freelancer"];
+let i=0,j=0,current="",isDeleting=false;
+function type(){
+  current=text[i];
+  if(!isDeleting){
+    document.getElementById("typing").textContent=current.substring(0,j++);
+    if(j>current.length){isDeleting=true;setTimeout(type,1000);return;}
+  }else{
+    document.getElementById("typing").textContent=current.substring(0,j--);
+    if(j==0){isDeleting=false;i=(i+1)%text.length;}
+  }
+  setTimeout(type,100);
+}
+type();
+
+// Scroll Animation
+const faders=document.querySelectorAll('.fade');
+window.addEventListener('scroll',()=>{
+  faders.forEach(el=>{
+    if(el.getBoundingClientRect().top < window.innerHeight-100){
+      el.classList.add('show');
+    }
+  });
+});
+
+// Filter Projects
+function filterSelection(category){
+  const projects=document.querySelectorAll('.project');
+  projects.forEach(p=>{
+    p.style.display=(category==='all'||p.classList.contains(category))?'block':'none';
+  });
+}
+
+// Contact Form
+function sendMail(e){
+  e.preventDefault();
+  const name=document.getElementById("name").value;
+  const email=document.getElementById("email").value;
+  const message=document.getElementById("message").value;
+  alert("Thank you "+name+"! Your message has been sent.");
+  window.location.href=`mailto:your@email.com?subject=Portfolio Contact&body=Name: ${name}%0AEmail: ${email}%0AMessage: ${message}`;
+  return false;
+}
+
+// Scroll To Top
+const topBtn=document.getElementById("topBtn");
+window.onscroll=function(){
+  topBtn.style.display=(document.documentElement.scrollTop>200)?"block":"none";
+};
+function topFunction(){
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+
+</body>
+</html>
+
+
